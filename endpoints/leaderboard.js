@@ -30,7 +30,7 @@ Routes.route("/api/leaderboard").get(async (req, res) => {
 Routes.route("/api/submit-score").post(async (req, res) => {
   try {
     const db = dbo.getDb();
-    const { username, score } = req.body;
+    const { username, score, gold } = req.body;
 
     if (score === undefined) {
       return res.status(400).json({ message: "Score is required" });
@@ -39,6 +39,7 @@ Routes.route("/api/submit-score").post(async (req, res) => {
     const newScore = {
       name: username || "Anonymous",
       score: Number(score),
+      gold: Number(gold) || 0,
       createdAt: new Date()
     };
 
